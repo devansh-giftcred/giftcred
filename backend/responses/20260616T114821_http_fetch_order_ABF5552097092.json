@@ -1,0 +1,24 @@
+{
+  "status_code": 409,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "transfer-encoding": "chunked",
+    "connection": "keep-alive",
+    "date": "Tue, 16 Jun 2026 11:48:21 GMT",
+    "expires": "-1",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+    "server": "WHS",
+    "cache-control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0, s-maxage=0",
+    "pragma": "no-cache",
+    "x-cache": "Error from cloudfront",
+    "via": "1.1 6c2990b4724ce28ba7088718a2312fc2.cloudfront.net (CloudFront)",
+    "x-amz-cf-pop": "BUD50-P1",
+    "x-amz-cf-id": "pz9c_RKMGr-zH2WC7ARt0T2f9wv7F0gLzWAWKHOrVpMla9EPxv2PGw==",
+    "x-xss-protection": "1; mode=block",
+    "x-frame-options": "SAMEORIGIN",
+    "referrer-policy": "same-origin",
+    "content-security-policy": "default-src 'self';script-src 'self' cdn.jsdelivr.net 'unsafe-inline';style-src 'self' 'unsafe-inline' fonts.googleapis.com;font-src 'self' fonts.gstatic.com;worker-src blob:;connect-src 'self';img-src 'self' *.cloudfront.net;media-src 'self'",
+    "x-content-type-options": "nosniff"
+  },
+  "body": "\n\t{\"status\":\"PROCESSING\",\"orderId\":\"ABF5552097092\",\"refno\":\"ORDER-8B905228A1A4\"}"
+}

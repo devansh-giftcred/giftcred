@@ -1,0 +1,25 @@
+{
+  "status_code": 200,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "transfer-encoding": "chunked",
+    "connection": "keep-alive",
+    "date": "Mon, 15 Jun 2026 11:22:44 GMT",
+    "expires": "-1",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+    "server": "WHS",
+    "cache-control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0, s-maxage=0",
+    "pragma": "no-cache",
+    "via": "1.1 95963cc3af56d1b2ae5c829e57be1424.cloudfront.net (CloudFront)",
+    "x-xss-protection": "1; mode=block",
+    "x-frame-options": "SAMEORIGIN",
+    "referrer-policy": "same-origin",
+    "content-security-policy": "default-src 'self';script-src 'self' cdn.jsdelivr.net 'unsafe-inline';style-src 'self' 'unsafe-inline' fonts.googleapis.com;font-src 'self' fonts.gstatic.com;worker-src blob:;connect-src 'self';img-src 'self' *.cloudfront.net;media-src 'self'",
+    "x-content-type-options": "nosniff",
+    "b3": "a34dcf59b26e9fe36961a70542e11849-e9ae7f5831b71378-1",
+    "x-cache": "Miss from cloudfront",
+    "x-amz-cf-pop": "BUD50-P1",
+    "x-amz-cf-id": "SXfjiGqbudMx9_-SCt1fN6zbG2OsqnlgO30k3Ck7vWWfLd9Mi4SAXw=="
+  },
+  "body": "{\"id\":121,\"name\":\"API SANDBOX B2B\",\"url\":\"\\/api-sandbox-b2b\",\"description\":null,\"shortDescription\":null,\"canonicalUrl\":null,\"colorCode\":null,\"bgColorCode\":null,\"offerDescription\":null,\"metaIndex\":null,\"metaKeyword\":null,\"pageTitle\":null,\"metaDescription\":null,\"subCategoryFilter\":false,\"images\":{\"image\":null,\"thumbnail\":null},\"subcategoriesCount\":0,\"subcategories\":[]}"
+}

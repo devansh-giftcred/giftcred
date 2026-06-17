@@ -1,0 +1,21 @@
+{
+  "status_code": 401,
+  "headers": {
+    "content-type": "application/x-www-form-urlencoded",
+    "transfer-encoding": "chunked",
+    "connection": "keep-alive",
+    "date": "Mon, 15 Jun 2026 11:21:00 GMT",
+    "server": "WHS",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+    "x-cache": "Error from cloudfront",
+    "via": "1.1 193687a1494164e896692c48d6b989c2.cloudfront.net (CloudFront)",
+    "x-amz-cf-pop": "WAW51-P3",
+    "x-amz-cf-id": "X3z__Svh7LnmsdqSG8nbSYVjP4dFuFha4bgNpl0kndExqsMUJa6n0A==",
+    "x-xss-protection": "1; mode=block",
+    "x-frame-options": "SAMEORIGIN",
+    "referrer-policy": "same-origin",
+    "content-security-policy": "default-src 'self';script-src 'self' cdn.jsdelivr.net 'unsafe-inline';style-src 'self' 'unsafe-inline' fonts.googleapis.com;font-src 'self' fonts.gstatic.com;worker-src blob:;connect-src 'self';img-src 'self' *.cloudfront.net;media-src 'self'",
+    "x-content-type-options": "nosniff"
+  },
+  "body": "oauth_problem=signature_invalid"
+}

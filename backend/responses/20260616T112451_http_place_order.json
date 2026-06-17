@@ -1,0 +1,26 @@
+{
+  "status_code": 202,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "transfer-encoding": "chunked",
+    "connection": "keep-alive",
+    "date": "Tue, 16 Jun 2026 11:24:52 GMT",
+    "set-cookie": "PHPSESSID=ve5ddguj0ch2ukkggl11tlho60; expires=Tue, 16-Jun-2026 13:04:51 GMT; Max-Age=6000; path=/; domain=sandbox.woohoo.in; secure; HttpOnly",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+    "server": "WHS",
+    "cache-control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0, s-maxage=0",
+    "pragma": "no-cache",
+    "expires": "-1",
+    "via": "1.1 c0ae143d0d0863d5529869fe565d8b32.cloudfront.net (CloudFront)",
+    "x-xss-protection": "1; mode=block",
+    "x-frame-options": "SAMEORIGIN",
+    "referrer-policy": "same-origin",
+    "content-security-policy": "default-src 'self';script-src 'self' cdn.jsdelivr.net 'unsafe-inline';style-src 'self' 'unsafe-inline' fonts.googleapis.com;font-src 'self' fonts.gstatic.com;worker-src blob:;connect-src 'self';img-src 'self' *.cloudfront.net;media-src 'self'",
+    "x-content-type-options": "nosniff",
+    "b3": "87839e0224862bc1b171871f69c23326-51ef35958e0fc3ac-1",
+    "x-cache": "Miss from cloudfront",
+    "x-amz-cf-pop": "WAW51-P3",
+    "x-amz-cf-id": "kU5ij2GgK8pXjjbI0p02CdGLj7usEzWBEG6hjb6il5xg7fP2fTBvDA=="
+  },
+  "body": "\n\t{\"status\":\"PROCESSING\",\"orderId\":\"ABF5552097062\",\"refno\":\"ORDER-FB981C99E73D\",\"cancel\":{\"allowed\":false},\"currency\":{\"code\":\"INR\",\"numericCode\":\"356\",\"symbol\":\"\\u20b9\"},\"payments\":[{\"code\":\"svc\",\"balance\":\"9873103.0000\"}]}"
+}

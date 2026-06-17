@@ -1,0 +1,25 @@
+{
+  "status_code": 200,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "transfer-encoding": "chunked",
+    "connection": "keep-alive",
+    "date": "Tue, 16 Jun 2026 11:50:57 GMT",
+    "expires": "-1",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+    "server": "WHS",
+    "cache-control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0, s-maxage=0",
+    "pragma": "no-cache",
+    "via": "1.1 85df1a603e38a146a69fe972f7c1c016.cloudfront.net (CloudFront)",
+    "x-xss-protection": "1; mode=block",
+    "x-frame-options": "SAMEORIGIN",
+    "referrer-policy": "same-origin",
+    "content-security-policy": "default-src 'self';script-src 'self' cdn.jsdelivr.net 'unsafe-inline';style-src 'self' 'unsafe-inline' fonts.googleapis.com;font-src 'self' fonts.gstatic.com;worker-src blob:;connect-src 'self';img-src 'self' *.cloudfront.net;media-src 'self'",
+    "x-content-type-options": "nosniff",
+    "b3": "2602345e38677b6996abc0ba01f937ce-6a8ee3d6b14e378b-1",
+    "x-cache": "Miss from cloudfront",
+    "x-amz-cf-pop": "BUD50-P1",
+    "x-amz-cf-id": "PjLXryzYME3FXK393GGuzvurxFmho6T8PUemjhD-iun8Z_Q_ZghYJQ=="
+  },
+  "body": "{\"products\":{\"EGVGBHLS001\":{\"sku\":\"EGVGBHLS001\",\"name\":\"Helios E-Gift card\",\"balanceEnquiryInstruction\":null,\"specialInstruction\":\"\",\"images\":{\"thumbnail\":\"https:\\/\\/d1ssr5uvl3uuv0.cloudfront.net\\/uat\\/product\\/EGVGBHLS001\\/d\\/thumbnail\\/67_microsite.png\",\"mobile\":\"https:\\/\\/d1ssr5uvl3uuv0.cloudfront.net\\/uat\\/product\\/EGVGBHLS001\\/d\\/mobile\\/67_microsite.png\",\"base\":\"https:\\/\\/d1ssr5uvl3uuv0.cloudfront.net\\/uat\\/product\\/EGVGBHLS001\\/d\\/image\\/67_microsite.png\",\"small\":\"https:\\/\\/d1ssr5uvl3uuv0.cloudfront.net\\/uat\\/product\\/EGVGBHLS001\\/d\\/small_image\\/67_spayapi.png\"},\"cardBehaviour\":\"QC\"}},\"cards\":[{\"sku\":\"EGVGBHLS001\",\"productName\":\"Helios E-Gift card\",\"labels\":{\"cardNumber\":\"Card Number\",\"cardPin\":\"PIN\",\"merchantCardNumber\":\"\",\"activationCode\":\"\",\"samsungWalletLabel\":\"\",\"edpayWalletLabel\":\"\",\"sequenceNumber\":\"\",\"validity\":\"Validity\"},\"cardNumber\":\"1206865023105232\",\"cardPin\":\"298188\",\"merchantCardNumber\":null,\"senderName\":\"\",\"activationCode\":null,\"barcode\":null,\"activationUrl\":null,\"redemptionUrl\":{\"label\":\"\",\"url\":\"\"},\"addToSamsungWallet\":\"\",\"addToEdpayWallet\":\"\",\"formats\":[],\"amount\":\"500.00\",\"redemptionStartDate\":\"\",\"validity\":\"2026-12-13T16:54:50+05:30\",\"issuanceDate\":\"2026-06-16T11:24:50+00:00\",\"sequenceNumber\":\"\",\"cardId\":6974099,\"recipientDetails\":{\"salutation\":null,\"name\":\"TEST USER\",\"firstname\":\"TEST\",\"lastname\":\"USER\",\"email\":\"TEST@EXAMPLE.COM\",\"mobileNumber\":\"+917988989555\",\"status\":\"\",\"failureReason\":\"\",\"delivery\":{\"mode\":\"API\",\"status\":{\"sms\":{\"status\":\"NA\",\"reason\":\"NA\"},\"email\":{\"status\":\"NA\",\"reason\":\"NA\"}}}},\"theme\":\"\"},{\"sku\":\"EGVGBHLS001\",\"productName\":\"Helios E-Gift card\",\"labels\":{\"cardNumber\":\"Card Number\",\"cardPin\":\"PIN\",\"merchantCardNumber\":\"\",\"activationCode\":\"\",\"samsungWalletLabel\":\"\",\"edpayWalletLabel\":\"\",\"sequenceNumber\":\"\",\"validity\":\"Validity\"},\"cardNumber\":\"1206865021166200\",\"cardPin\":\"109738\",\"merchantCardNumber\":null,\"senderName\":\"\",\"activationCode\":null,\"barcode\":null,\"activationUrl\":null,\"redemptionUrl\":{\"label\":\"\",\"url\":\"\"},\"addToSamsungWallet\":\"\",\"addToEdpayWallet\":\"\",\"formats\":[],\"amount\":\"500.00\",\"redemptionStartDate\":\"\",\"validity\":\"2026-12-13T16:54:50+05:30\",\"issuanceDate\":\"2026-06-16T11:24:50+00:00\",\"sequenceNumber\":\"\",\"cardId\":6974100,\"recipientDetails\":{\"salutation\":null,\"name\":\"TEST USER\",\"firstname\":\"TEST\",\"lastname\":\"USER\",\"email\":\"TEST@EXAMPLE.COM\",\"mobileNumber\":\"+917988989555\",\"status\":\"\",\"failureReason\":\"\",\"delivery\":{\"mode\":\"API\",\"status\":{\"sms\":{\"status\":\"NA\",\"reason\":\"NA\"},\"email\":{\"status\":\"NA\",\"reason\":\"NA\"}}}},\"theme\":\"\"}],\"currency\":{\"code\":\"INR\",\"numericCode\":\"356\",\"symbol\":\"\\u20b9\"},\"deliveryMode\":\"API\",\"egvDeliveryType\":\"MULTIPLE\",\"delivery\":{\"summary\":{\"email\":{\"totalCount\":0,\"delivered\":0,\"failed\":0,\"inProgress\":0},\"sms\":{\"totalCount\":0,\"delivered\":0,\"failed\":0,\"inProgress\":0},\"totalCardsCount\":0}},\"total_cards\":2}"
+}

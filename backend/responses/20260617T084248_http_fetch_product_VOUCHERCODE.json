@@ -1,0 +1,26 @@
+{
+  "status_code": 200,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "transfer-encoding": "chunked",
+    "connection": "keep-alive",
+    "date": "Wed, 17 Jun 2026 08:42:48 GMT",
+    "set-cookie": "PHPSESSID=jfhgrpg80dv6u62um3m2o9746f; expires=Wed, 17-Jun-2026 10:22:48 GMT; Max-Age=6000; path=/; domain=sandbox.woohoo.in; secure; HttpOnly",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+    "server": "WHS",
+    "cache-control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0, s-maxage=0",
+    "pragma": "no-cache",
+    "expires": "-1",
+    "via": "1.1 9fd43c21f87d150eec8b1b2a1cd0fb12.cloudfront.net (CloudFront)",
+    "x-xss-protection": "1; mode=block",
+    "x-frame-options": "SAMEORIGIN",
+    "referrer-policy": "same-origin",
+    "content-security-policy": "default-src 'self';script-src 'self' cdn.jsdelivr.net 'unsafe-inline';style-src 'self' 'unsafe-inline' fonts.googleapis.com;font-src 'self' fonts.gstatic.com;worker-src blob:;connect-src 'self';img-src 'self' *.cloudfront.net;media-src 'self'",
+    "x-content-type-options": "nosniff",
+    "b3": "6b4f6d211e9b48fb091c20b268029340-8b6b3db7075de2ed-1",
+    "x-cache": "Miss from cloudfront",
+    "x-amz-cf-pop": "PRG50-P2",
+    "x-amz-cf-id": "TP9gu0mndsAhnWEBaiYi_wPtFfsirgakwslO4Tn9f8JvOw9Z4uRA3g=="
+  },
+  "body": "{\"id\":\"325\",\"sku\":\"VOUCHERCODE\",\"name\":\"API TESTING - Voucher code\",\"description\":\"API TESTING - Voucher code\",\"shortDescription\":\"API TESTING - Voucher code\",\"importantInstructions\":null,\"disableCart\":false,\"purchaserLimit\":null,\"purchaserDescription\":null,\"offerShortDesc\":null,\"relatedProductOptions\":{\"PROMO\":false,\"DESIGNS\":false,\"RELATED\":false},\"url\":\"api-testing-voucher-code\",\"quantity\":{\"min\":null,\"max\":null,\"validationEnabled\":false},\"price\":{\"price\":\"RANGE\",\"type\":\"RANGE\",\"min\":\"100\",\"max\":\"10000\",\"denominations\":[\"100\",\"200\",\"500\",\"1000\"],\"currency\":{\"code\":\"INR\",\"symbol\":\"\\u20b9\",\"numericCode\":\"356\"},\"cpg\":{\"\":{\"type\":\"RANGE\",\"min\":\"100\",\"max\":\"10000\",\"denominations\":[\"100\",\"200\",\"500\",\"1000\"]}},\"defaultPrice\":null},\"kycEnabled\":\"0\",\"additionalForm\":null,\"metaInformation\":{\"page\":{\"title\":null},\"meta\":{\"title\":null,\"keywords\":null,\"description\":null,\"category\":null,\"index\":\"0\"},\"canonical\":{\"url\":null}},\"defaultCategory\":0,\"type\":\"DIGITAL\",\"cardBehaviour\":\"qc\",\"schedulingEnabled\":false,\"currency\":\"356\",\"images\":{\"thumbnail\":\"https:\\/\\/d1ssr5uvl3uuv0.cloudfront.net\\/uat\\/product\\/VOUCHERCODE\\/d\\/thumbnail\\/325_microsite.jpg?appId=1075\",\"mobile\":\"https:\\/\\/d1ssr5uvl3uuv0.cloudfront.net\\/uat\\/product\\/VOUCHERCODE\\/d\\/mobile\\/325_microsite.jpg?appId=1075\",\"base\":\"https:\\/\\/d1ssr5uvl3uuv0.cloudfront.net\\/uat\\/product\\/VOUCHERCODE\\/d\\/image\\/325_microsite.jpg?appId=1075\",\"small\":\"https:\\/\\/d1ssr5uvl3uuv0.cloudfront.net\\/uat\\/product\\/VOUCHERCODE\\/d\\/small_image\\/325_spayapi.jpg?appId=1075\"},\"tnc\":{\"link\":\"https:\\/\\/woohooqa.app.link\\/e\\/4e4DOt84kqb\",\"content\":\"Brand TnC's here\"},\"categories\":[\"7\",\"54\",\"108\",\"118\",\"121\",\"122\",\"132\",\"156\",\"178\",\"207\",\"214\",\"218\",\"271\",\"291\",\"402\",\"411\",\"616\",\"617\"],\"themes\":[],\"customThemesAvailable\":false,\"handlingCharges\":[],\"reloadCardNumber\":false,\"expiry\":\"1 Year from the Date of Expiry\",\"formatExpiry\":null,\"couponcodeDesc\":null,\"discounts\":[],\"corporateDiscounts\":null,\"relatedProducts\":[],\"storeLocatorUrl\":null,\"brandName\":\"API TESTING SIT\",\"brandCode\":\"API-TESTING-SIT\",\"brandLogo\":\"https:\\/\\/d1ssr5uvl3uuv0.cloudfront.net\\/uat-woohoo\\/woohoo\\/woohoo-card\\/brands\\/30c4c931-4254-44e3-9e10-ac1e366d33e6.png\",\"etaMessage\":\"\",\"createdAt\":\"2018-07-26T07:00:33+00:00\",\"updatedAt\":\"2026-04-06T05:03:29+00:00\",\"cpg\":{\"barcode\":{\"encoding\":null},\"redemptionTerms\":[],\"type\":\"clp\",\"code\":\"Test Pat eGift Card- Voucher Code\",\"issuerName\":\"\",\"redeemable\":[\"ONLINE\",\"OFFLINE\"],\"erupi_purpose\":null,\"erupi_payer_type\":null,\"erupi_payee_type\":null,\"erupi_recurrence_pattern\":null,\"erupi_validity\":null},\"payout\":{\"enabled\":true,\"payment_methods\":[\"svc\"],\"account_types\":[\"BANK_ACCOUNT\",\"UPI\",\"TELEPHONE\"],\"transaction_types\":[\"IMPS\",\"NEFT\",\"UPI\"],\"maximum_beneficiaries\":\"1\",\"validate_terms_and_condition\":\"I accept TnCs\",\"validation\":{\"amount\":\"1\",\"edit_beneficiary\":true,\"convenience_charge\":\"\",\"vpa_penny_drop_required\":true}},\"convenience_charges\":[],\"allowedfulfillments\":[{\"code\":false}],\"rewardsDescription\":null,\"travelPass\":[],\"addCardToWallet\":false,\"orderModes\":[],\"emiApplicable\":false,\"emiApplicableMessage\":\"\",\"upc\":{\"id\":\"75\"},\"campaigns\":null,\"redemption_rules\":[]}"
+}

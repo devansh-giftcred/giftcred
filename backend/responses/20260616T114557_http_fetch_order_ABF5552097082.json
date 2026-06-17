@@ -1,0 +1,25 @@
+{
+  "status_code": 200,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "transfer-encoding": "chunked",
+    "connection": "keep-alive",
+    "date": "Tue, 16 Jun 2026 11:45:58 GMT",
+    "expires": "-1",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+    "server": "WHS",
+    "cache-control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0, s-maxage=0",
+    "pragma": "no-cache",
+    "via": "1.1 9571f6e4f610e5c8316b59c35f160898.cloudfront.net (CloudFront)",
+    "x-xss-protection": "1; mode=block",
+    "x-frame-options": "SAMEORIGIN",
+    "referrer-policy": "same-origin",
+    "content-security-policy": "default-src 'self';script-src 'self' cdn.jsdelivr.net 'unsafe-inline';style-src 'self' 'unsafe-inline' fonts.googleapis.com;font-src 'self' fonts.gstatic.com;worker-src blob:;connect-src 'self';img-src 'self' *.cloudfront.net;media-src 'self'",
+    "x-content-type-options": "nosniff",
+    "b3": "9f87c4aec77353fd774c15f6fe8b47ad-bb389e60a25a11b8-1",
+    "x-cache": "Miss from cloudfront",
+    "x-amz-cf-pop": "BUD50-P1",
+    "x-amz-cf-id": "FEBq4u8cnl-CD4NXVezYS7_-zBBun0JWWvTb0YVYiZuNSORbzeoqAg=="
+  },
+  "body": "{\"products\":{\"UBEREGV001\":{\"sku\":\"UBEREGV001\",\"name\":\"UBER EGV\",\"balanceEnquiryInstruction\":null,\"specialInstruction\":\"\",\"images\":{\"thumbnail\":\"\",\"mobile\":\"\",\"base\":\"\",\"small\":\"\"},\"cardBehaviour\":\"QC\"}},\"cards\":[{\"sku\":\"UBEREGV001\",\"productName\":\"UBER EGV\",\"labels\":{\"cardNumber\":\"Card Number\",\"cardPin\":\"PIN\",\"merchantCardNumber\":\"\",\"activationCode\":\"\",\"samsungWalletLabel\":\"\",\"edpayWalletLabel\":\"\",\"sequenceNumber\":\"\",\"validity\":\"Validity\"},\"cardNumber\":\"1206865024022785\",\"cardPin\":\"109706\",\"merchantCardNumber\":null,\"senderName\":\"\",\"activationCode\":null,\"barcode\":null,\"activationUrl\":null,\"redemptionUrl\":{\"label\":\"\",\"url\":\"\"},\"addToSamsungWallet\":\"\",\"addToEdpayWallet\":\"\",\"formats\":[],\"amount\":\"500.00\",\"redemptionStartDate\":\"\",\"validity\":\"2026-12-13T17:10:51+05:30\",\"issuanceDate\":\"2026-06-16T11:40:51+00:00\",\"sequenceNumber\":\"\",\"cardId\":6974115,\"recipientDetails\":{\"salutation\":null,\"name\":\"TEST USER\",\"firstname\":\"TEST\",\"lastname\":\"USER\",\"email\":\"TEST@EXAMPLE.COM\",\"mobileNumber\":\"+917884458888\",\"status\":\"\",\"failureReason\":\"\",\"delivery\":{\"mode\":\"API\",\"status\":{\"sms\":{\"status\":\"NA\",\"reason\":\"NA\"},\"email\":{\"status\":\"NA\",\"reason\":\"NA\"}}}},\"theme\":\"\"}],\"currency\":{\"code\":\"INR\",\"numericCode\":\"356\",\"symbol\":\"\\u20b9\"},\"deliveryMode\":\"API\",\"egvDeliveryType\":\"MULTIPLE\",\"delivery\":{\"summary\":{\"email\":{\"totalCount\":0,\"delivered\":0,\"failed\":0,\"inProgress\":0},\"sms\":{\"totalCount\":0,\"delivered\":0,\"failed\":0,\"inProgress\":0},\"totalCardsCount\":0}},\"total_cards\":1}"
+}

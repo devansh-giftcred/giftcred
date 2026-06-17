@@ -1,0 +1,25 @@
+{
+  "status_code": 200,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "transfer-encoding": "chunked",
+    "connection": "keep-alive",
+    "date": "Wed, 17 Jun 2026 11:08:02 GMT",
+    "expires": "-1",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+    "server": "WHS",
+    "cache-control": "no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0, s-maxage=0",
+    "pragma": "no-cache",
+    "via": "1.1 193687a1494164e896692c48d6b989c2.cloudfront.net (CloudFront)",
+    "x-xss-protection": "1; mode=block",
+    "x-frame-options": "SAMEORIGIN",
+    "referrer-policy": "same-origin",
+    "content-security-policy": "default-src 'self';script-src 'self' cdn.jsdelivr.net 'unsafe-inline';style-src 'self' 'unsafe-inline' fonts.googleapis.com;font-src 'self' fonts.gstatic.com;worker-src blob:;connect-src 'self';img-src 'self' *.cloudfront.net;media-src 'self'",
+    "x-content-type-options": "nosniff",
+    "b3": "d9bf44491ed2593883cf0588c783d0eb-6f41a0594b634379-1",
+    "x-cache": "Miss from cloudfront",
+    "x-amz-cf-pop": "WAW51-P3",
+    "x-amz-cf-id": "t_iMPComDBPyMMRvwdUZl5w4zqf4tcRsWXKSemz6w8wITdTYOwP9YQ=="
+  },
+  "body": "{\"products\":{\"UBEFLOW\":{\"sku\":\"UBEFLOW\",\"name\":\"API TESTING - UBE\",\"balanceEnquiryInstruction\":null,\"specialInstruction\":\"\",\"images\":{\"thumbnail\":\"https:\\/\\/d1ssr5uvl3uuv0.cloudfront.net\\/uat\\/product\\/UBEFLOW\\/d\\/thumbnail\\/326_microsite.png\",\"mobile\":\"https:\\/\\/d1ssr5uvl3uuv0.cloudfront.net\\/uat\\/product\\/UBEFLOW\\/d\\/mobile\\/326_microsite.png\",\"base\":\"https:\\/\\/d1ssr5uvl3uuv0.cloudfront.net\\/uat\\/product\\/UBEFLOW\\/d\\/image\\/326_microsite.png\",\"small\":\"https:\\/\\/d1ssr5uvl3uuv0.cloudfront.net\\/uat\\/product\\/UBEFLOW\\/d\\/small_image\\/326_spayapi.png\"},\"cardBehaviour\":\"QC\"}},\"cards\":[{\"sku\":\"UBEFLOW\",\"productName\":\"API TESTING - UBE\",\"labels\":{\"cardNumber\":\"Card Number\",\"cardPin\":\"Card PIN\",\"merchantCardNumber\":\"\",\"activationCode\":\"Activation Code\",\"samsungWalletLabel\":\"\",\"edpayWalletLabel\":\"\",\"sequenceNumber\":\"\",\"validity\":\"Validity\"},\"cardNumber\":\"8090920024204252\",\"cardPin\":\"107256\",\"merchantCardNumber\":null,\"senderName\":\"\",\"activationCode\":\"8XjNDgkCyjhVXb\",\"barcode\":null,\"activationUrl\":\"https:\\/\\/ubeuat.woohoo.in\\/claim\\/809092\\/a\\/8XjNDgkCyjhVXb\",\"redemptionUrl\":{\"label\":\"\",\"url\":\"\"},\"addToSamsungWallet\":\"\",\"addToEdpayWallet\":\"\",\"formats\":[{\"key\":\"CNONLY\",\"value\":\"8090920024204252\"}],\"amount\":\"498.00\",\"redemptionStartDate\":\"\",\"validity\":\"2027-06-17T16:04:34+05:30\",\"issuanceDate\":\"2026-06-17T10:34:34+00:00\",\"sequenceNumber\":\"\",\"cardId\":6974794,\"recipientDetails\":{\"salutation\":null,\"name\":\"TEST USER\",\"firstname\":\"TEST\",\"lastname\":\"USER\",\"email\":\"DEVANSHSTAR7@GMAIL.COM\",\"mobileNumber\":\"+917987878789\",\"status\":\"\",\"failureReason\":\"\",\"delivery\":{\"mode\":\"API\",\"status\":{\"sms\":{\"status\":\"NA\",\"reason\":\"NA\"},\"email\":{\"status\":\"NA\",\"reason\":\"NA\"}}}},\"theme\":\"\"},{\"sku\":\"UBEFLOW\",\"productName\":\"API TESTING - UBE\",\"labels\":{\"cardNumber\":\"Card Number\",\"cardPin\":\"Card PIN\",\"merchantCardNumber\":\"\",\"activationCode\":\"Activation Code\",\"samsungWalletLabel\":\"\",\"edpayWalletLabel\":\"\",\"sequenceNumber\":\"\",\"validity\":\"Validity\"},\"cardNumber\":\"8090920027883845\",\"cardPin\":\"142632\",\"merchantCardNumber\":null,\"senderName\":\"\",\"activationCode\":\"JdtBTvf8QaEarp\",\"barcode\":null,\"activationUrl\":\"https:\\/\\/ubeuat.woohoo.in\\/claim\\/809092\\/a\\/JdtBTvf8QaEarp\",\"redemptionUrl\":{\"label\":\"\",\"url\":\"\"},\"addToSamsungWallet\":\"\",\"addToEdpayWallet\":\"\",\"formats\":[{\"key\":\"CNONLY\",\"value\":\"8090920027883845\"}],\"amount\":\"498.00\",\"redemptionStartDate\":\"\",\"validity\":\"2027-06-17T16:04:34+05:30\",\"issuanceDate\":\"2026-06-17T10:34:34+00:00\",\"sequenceNumber\":\"\",\"cardId\":6974795,\"recipientDetails\":{\"salutation\":null,\"name\":\"TEST USER\",\"firstname\":\"TEST\",\"lastname\":\"USER\",\"email\":\"DEVANSHSTAR7@GMAIL.COM\",\"mobileNumber\":\"+917987878789\",\"status\":\"\",\"failureReason\":\"\",\"delivery\":{\"mode\":\"API\",\"status\":{\"sms\":{\"status\":\"NA\",\"reason\":\"NA\"},\"email\":{\"status\":\"NA\",\"reason\":\"NA\"}}}},\"theme\":\"\"}],\"currency\":{\"code\":\"INR\",\"numericCode\":\"356\",\"symbol\":\"\\u20b9\"},\"deliveryMode\":\"API\",\"egvDeliveryType\":\"MULTIPLE\",\"delivery\":{\"summary\":{\"email\":{\"totalCount\":0,\"delivered\":0,\"failed\":0,\"inProgress\":0},\"sms\":{\"totalCount\":0,\"delivered\":0,\"failed\":0,\"inProgress\":0},\"totalCardsCount\":0}},\"total_cards\":2,\"orderId\":\"ABF5552097946\"}"
+}

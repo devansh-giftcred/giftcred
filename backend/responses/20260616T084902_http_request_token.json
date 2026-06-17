@@ -1,0 +1,22 @@
+{
+  "status_code": 200,
+  "headers": {
+    "content-type": "application/x-www-form-urlencoded",
+    "transfer-encoding": "chunked",
+    "connection": "keep-alive",
+    "date": "Tue, 16 Jun 2026 08:49:02 GMT",
+    "server": "WHS",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+    "via": "1.1 b414c1a5c68a99d254cfa9a4dac6eab0.cloudfront.net (CloudFront)",
+    "x-xss-protection": "1; mode=block",
+    "x-frame-options": "SAMEORIGIN",
+    "referrer-policy": "same-origin",
+    "content-security-policy": "default-src 'self';script-src 'self' cdn.jsdelivr.net 'unsafe-inline';style-src 'self' 'unsafe-inline' fonts.googleapis.com;font-src 'self' fonts.gstatic.com;worker-src blob:;connect-src 'self';img-src 'self' *.cloudfront.net;media-src 'self'",
+    "x-content-type-options": "nosniff",
+    "b3": "b103b042cddc2b6c6de519088e9a2b6b-0f057d65d6e2e616-1",
+    "x-cache": "Miss from cloudfront",
+    "x-amz-cf-pop": "BUD50-P1",
+    "x-amz-cf-id": "scJitfMnwymni8YnNLGX1OEBxk2RDgJi5OIwPQHy4F7VMZvI3Mj9rg=="
+  },
+  "body": "oauth_token=ee14068133d4b0a3eb85e5bbecd8c309&oauth_token_secret=ca3087e2f206dde028f126c6d9a48888&oauth_callback_confirmed=true"
+}
