@@ -5,6 +5,7 @@ import { extractClientIp } from "../auth/crypto.utils.js";
 import { AuthError } from "../lib/errors.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 import { requirePrivilege } from "../middleware/requirePrivilege.js";
+import { requireStepUp } from "../middleware/requireStepUp.js";
 import {
   acceptInvite,
   assignUserRole,
@@ -12,6 +13,7 @@ import {
   listUsersInScopedAccounts,
   sendUserInvite,
 } from "./invite.service.js";
+import { revokeUserSessionAsAdmin } from "./session-admin.service.js";
 
 export const usersRouter = Router();
 
@@ -96,6 +98,7 @@ usersRouter.post("/invites", requirePrivilege("invite_user"), async (req: Authed
 usersRouter.patch(
   "/:userId/role",
   requirePrivilege("assign_roles"),
+  requireStepUp,
   async (req: AuthedRequest, res, next) => {
     try {
       const targetUserId = Number(req.params.userId);
@@ -115,6 +118,27 @@ usersRouter.patch(
         })
       );
       res.json({ message: "Role updated." });
+    } catch (err) {
+      if (err instanceof AuthError) {
+        res.status(err.statusCode).json({ error: err.message });
+        return;
+      }
+      next(err);
+    }
+  }
+);
+
+usersRouter.delete(
+  "/:userId/sessions/:sessionId",
+  requirePrivilege("manage_users"),
+  async (req: AuthedRequest, res, next) => {
+    try {
+      const targetUserId = Number(req.params.userId);
+      const sessionId = Number(req.params.sessionId);
+      await withClient((client) =>
+        revokeUserSessionAsAdmin(client, req.auth!, targetUserId, sessionId, clientMeta(req))
+      );
+      res.json({ message: "Session revoked." });
     } catch (err) {
       if (err instanceof AuthError) {
         res.status(err.statusCode).json({ error: err.message });

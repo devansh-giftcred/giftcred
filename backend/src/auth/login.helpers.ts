@@ -18,7 +18,8 @@ export async function issueSessionTokens(
     user.account_id,
     user.role_id,
     role,
-    refreshToken
+    refreshToken,
+    sessionId
   );
   return { tokens, sessionId };
 }

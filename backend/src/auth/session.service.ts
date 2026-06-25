@@ -1,6 +1,12 @@
 import type { PoolClient } from "pg";
 import { config } from "../config.js";
 import { AuthError } from "../lib/errors.js";
+import {
+  getRedis,
+  isRedisReady,
+  SESSION_ACTIVITY_TTL_SECONDS,
+  sessionActivityKey,
+} from "../redis/client.js";
 import { hashToken } from "./crypto.utils.js";
 
 export interface SessionMeta {
@@ -44,7 +50,45 @@ export async function createSession(
       expiresAt.toISOString(),
     ]
   );
-  return result.rows[0].id;
+  const sessionId = result.rows[0].id;
+  await trackSessionActivity(sessionId);
+  return sessionId;
+}
+
+export async function trackSessionActivity(sessionId: number): Promise<void> {
+  if (!isRedisReady()) return;
+  try {
+    await getRedis().set(
+      sessionActivityKey(sessionId),
+      "1",
+      "EX",
+      SESSION_ACTIVITY_TTL_SECONDS
+    );
+  } catch {
+    // non-fatal
+  }
+}
+
+export async function refreshSessionActivity(sessionId: number): Promise<boolean> {
+  if (!isRedisReady()) return true;
+  try {
+    const key = sessionActivityKey(sessionId);
+    const exists = await getRedis().exists(key);
+    if (!exists) return false;
+    await getRedis().expire(key, SESSION_ACTIVITY_TTL_SECONDS);
+    return true;
+  } catch {
+    return true;
+  }
+}
+
+export async function clearSessionActivity(sessionId: number): Promise<void> {
+  if (!isRedisReady()) return;
+  try {
+    await getRedis().del(sessionActivityKey(sessionId));
+  } catch {
+    // non-fatal
+  }
 }
 
 export async function findActiveSessionByToken(client: PoolClient, refreshToken: string) {
@@ -104,12 +148,35 @@ export async function rotateSession(
   return newSessionId;
 }
 
+export async function isSessionActive(
+  client: PoolClient,
+  sessionId: number,
+  userId: number
+): Promise<boolean> {
+  const result = await client.query(
+    `
+    SELECT id
+    FROM user_sessions
+    WHERE id = $1
+      AND user_id = $2
+      AND revoked_at IS NULL
+      AND expires_at > NOW()
+  `,
+    [sessionId, userId]
+  );
+  return (result.rowCount ?? 0) > 0;
+}
+
 export async function revokeSession(client: PoolClient, sessionId: number): Promise<boolean> {
   const result = await client.query(
     `UPDATE user_sessions SET revoked_at = NOW() WHERE id = $1 AND revoked_at IS NULL RETURNING id`,
     [sessionId]
   );
-  return (result.rowCount ?? 0) > 0;
+  const revoked = (result.rowCount ?? 0) > 0;
+  if (revoked) {
+    await clearSessionActivity(sessionId);
+  }
+  return revoked;
 }
 
 export async function revokeSessionForUser(

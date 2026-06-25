@@ -12,16 +12,19 @@ import {
   logout,
   refreshAccessToken,
 } from "../auth/login.service.js";
-import { enableMfa, setupMfa, verifyMfaForLogin } from "../auth/mfa.service.js";
-import { verifyMfaPendingToken } from "../auth/jwt.service.js";
+import { enableMfa, setupMfa, verifyMfaForLogin, verifyStepUpMfa } from "../auth/mfa.service.js";
+import { verifyMfaPendingToken, signStepUpToken } from "../auth/jwt.service.js";
 import { requestLoginOtp, verifyLoginOtp } from "../auth/otp.service.js";
 import { findUserBySsoIdentity, linkSsoIdentity, type SsoProfile } from "../auth/sso.service.js";
 import { issueSessionTokens } from "../auth/login.helpers.js";
-import { authMiddleware } from "../middleware/authMiddleware.js";
+import { loginRateLimiter } from "../middleware/loginRateLimiter.js";
+import { requireStepUp } from "../middleware/requireStepUp.js";
 import { invalidateRoleCache, resolveUserRole } from "../redis/roleCache.js";
 import { findActiveSessionByToken, findActiveSessions, revokeSessionForUser } from "../auth/session.service.js";
 import { AuditAction } from "../audit/actions.js";
 import { writeAuditLog } from "../audit/audit.service.js";
+import { changePassword } from "../auth/password-change.service.js";
+import { authMiddleware } from "../middleware/authMiddleware.js";
 import { config } from "../config.js";
 
 export const authRouter = Router();
@@ -33,7 +36,7 @@ function clientMeta(req: AuthedRequest) {
   };
 }
 
-authRouter.post("/login", async (req, res, next) => {
+authRouter.post("/login", loginRateLimiter, async (req, res, next) => {
   try {
     const email = String(req.body?.email ?? "");
     const password = String(req.body?.password ?? "");
@@ -91,6 +94,9 @@ authRouter.post("/otp/verify", async (req, res, next) => {
           roleSlug: role.roleSlug,
           privileges: role.privileges,
           isPlatformAdmin: role.isPlatformAdmin,
+          mfaEnabled: role.mfaEnabled,
+          mfaEnforcementActive:
+            role.accountType === "platform" || role.accountMfaEnforced,
         },
       };
     });
@@ -170,6 +176,58 @@ authRouter.post("/mfa/enable", authMiddleware, async (req: AuthedRequest, res, n
       })
     );
     res.json(result);
+  } catch (err) {
+    if (err instanceof AuthError) {
+      res.status(err.statusCode).json({ error: err.message });
+      return;
+    }
+    next(err);
+  }
+});
+
+authRouter.post("/mfa/step-up", authMiddleware, async (req: AuthedRequest, res, next) => {
+  try {
+    const totpCode = String(req.body?.code ?? req.body?.totpCode ?? "");
+    if (!totpCode) {
+      res.status(400).json({ error: "TOTP code is required." });
+      return;
+    }
+
+    await withClient((client) =>
+      verifyStepUpMfa(client, req.auth!.userId, totpCode)
+    );
+
+    const stepUpToken = signStepUpToken(req.auth!.userId, req.auth!.accountId);
+    res.json({ stepUpToken, expiresIn: 300 });
+  } catch (err) {
+    if (err instanceof AuthError) {
+      res.status(err.statusCode).json({ error: err.message });
+      return;
+    }
+    next(err);
+  }
+});
+
+authRouter.post("/password/change", authMiddleware, requireStepUp, async (req: AuthedRequest, res, next) => {
+  try {
+    const currentPassword = String(req.body?.currentPassword ?? "");
+    const newPassword = String(req.body?.newPassword ?? "");
+    if (!currentPassword || !newPassword) {
+      res.status(400).json({ error: "currentPassword and newPassword are required." });
+      return;
+    }
+
+    await withClient((client) =>
+      changePassword(
+        client,
+        req.auth!.userId,
+        req.auth!.accountId,
+        currentPassword,
+        newPassword,
+        clientMeta(req)
+      )
+    );
+    res.json({ message: "Password changed." });
   } catch (err) {
     if (err instanceof AuthError) {
       res.status(err.statusCode).json({ error: err.message });

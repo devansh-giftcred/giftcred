@@ -5,6 +5,7 @@ import type { PoolClient } from "pg";
 import { AuditAction } from "../audit/actions.js";
 import { writeAuditLog } from "../audit/audit.service.js";
 import { AuthError } from "../lib/errors.js";
+import { invalidateRoleCache } from "../redis/roleCache.js";
 import { generateSecureToken } from "./crypto.utils.js";
 
 const RECOVERY_CODE_COUNT = 10;
@@ -77,6 +78,8 @@ export async function enableMfa(
     [JSON.stringify(hashedCodes), userId]
   );
 
+  await invalidateRoleCache(userId);
+
   await writeAuditLog(client, {
     actingUserId: userId,
     accountId: meta.accountId,
@@ -139,6 +142,14 @@ export async function verifyMfaForLogin(
   }
 
   throw new AuthError("TOTP code or recovery code is required.", 400);
+}
+
+export async function verifyStepUpMfa(
+  client: PoolClient,
+  userId: number,
+  totpCode: string
+): Promise<void> {
+  await verifyMfaForLogin(client, userId, { totpCode });
 }
 
 export async function isMfaEnabled(client: PoolClient, userId: number): Promise<boolean> {

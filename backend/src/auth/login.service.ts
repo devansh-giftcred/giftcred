@@ -22,7 +22,16 @@ type LoginUserRow = {
   role_id: number;
   status: string;
   mfa_enabled: boolean;
+  account_type: "platform" | "master" | "child";
+  mfa_enforced: boolean;
 };
+
+function isMfaEnforcementActive(
+  accountType: "platform" | "master" | "child",
+  mfaEnforced: boolean
+): boolean {
+  return accountType === "platform" || mfaEnforced;
+}
 
 export async function loginWithPassword(
   client: PoolClient,
@@ -32,7 +41,11 @@ export async function loginWithPassword(
 ) {
   const normalized = normalizeEmail(email);
   const result = await client.query<LoginUserRow>(
-    `SELECT id, email, password_hash, account_id, role_id, status, mfa_enabled FROM users WHERE email = $1`,
+    `SELECT u.id, u.email, u.password_hash, u.account_id, u.role_id, u.status, u.mfa_enabled,
+            a.account_type, COALESCE(a.mfa_enforced, FALSE) AS mfa_enforced
+     FROM users u
+     JOIN accounts a ON a.id = u.account_id
+     WHERE u.email = $1`,
     [normalized]
   );
   const user = result.rows[0];
@@ -84,7 +97,15 @@ export async function loginWithPassword(
     };
   }
 
-  return completeLogin(client, user, role, meta, "password");
+  const loginResult = await completeLogin(client, user, role, meta, "password");
+  const mfaSetupRequired =
+    !user.mfa_enabled &&
+    isMfaEnforcementActive(user.account_type, user.mfa_enforced);
+
+  return {
+    ...loginResult,
+    ...(mfaSetupRequired ? { mfa_setup_required: true as const } : {}),
+  };
 }
 
 export async function completeLoginAfterMfa(
@@ -159,14 +180,15 @@ export async function refreshAccessToken(
   if (!role) throw new AuthError("Unable to resolve user role.", 500);
 
   const newRefreshToken = generateSecureToken(48);
-  await rotateSession(client, session.id, user.id, newRefreshToken, meta);
+  const newSessionId = await rotateSession(client, session.id, user.id, newRefreshToken, meta);
   const tokens = issueTokenPair(
     user.id,
     user.email,
     user.account_id,
     user.role_id,
     { roleSlug: role.roleSlug, privileges: role.privileges },
-    newRefreshToken
+    newRefreshToken,
+    newSessionId
   );
 
   return { tokens, userId: user.id };
@@ -198,6 +220,8 @@ export async function getUserEmail(userId: number): Promise<string | null> {
 
 function buildAuthContext(email: string, role: CachedRoleContext | null): AuthContext | null {
   if (!role) return null;
+  const mfaEnforcementActive =
+    role.accountType === "platform" || role.accountMfaEnforced;
   return {
     userId: role.userId,
     email,
@@ -207,6 +231,8 @@ function buildAuthContext(email: string, role: CachedRoleContext | null): AuthCo
     roleSlug: role.roleSlug,
     privileges: role.privileges,
     isPlatformAdmin: role.isPlatformAdmin,
+    mfaEnabled: role.mfaEnabled,
+    mfaEnforcementActive,
   };
 }
 

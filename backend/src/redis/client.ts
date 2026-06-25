@@ -72,3 +72,9 @@ export function roleCacheKey(userId: number): string {
 export function otpRateLimitKey(email: string): string {
   return `giftcred:otp:rate:${email.toLowerCase()}`;
 }
+
+export const SESSION_ACTIVITY_TTL_SECONDS = 1800;
+
+export function sessionActivityKey(sessionId: number): string {
+  return `session_activity:${sessionId}`;
+}

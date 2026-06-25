@@ -13,6 +13,10 @@ export interface AuthContext {
   roleSlug: string;
   privileges: string[];
   isPlatformAdmin: boolean;
+  mfaEnabled: boolean;
+  mfaEnforcementActive: boolean;
+  isApiKeyAuth?: boolean;
+  apiKeyId?: number;
 }
 
 export interface AccessTokenPayload {
@@ -22,7 +26,14 @@ export interface AccessTokenPayload {
   roleId: number;
   roleSlug: string;
   privileges: string[];
+  sessionId: number;
   type: "access";
+}
+
+export interface StepUpTokenPayload {
+  sub: number;
+  accountId: number;
+  type: "step_up";
 }
 
 export interface MfaPendingTokenPayload {

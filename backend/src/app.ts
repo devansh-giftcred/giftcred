@@ -2,7 +2,11 @@ import cors from "cors";
 import express, { type Request, type Response, type NextFunction } from "express";
 import helmet from "helmet";
 import passport from "passport";
+import { pinoHttp } from "pino-http";
+import { apiKeysRouter } from "./api-keys/routes.js";
 import { accountsRouter } from "./accounts/routes.js";
+import { logger } from "./logger.js";
+import { apiKeyMiddleware } from "./middleware/apiKeyMiddleware.js";
 import { auditRouter } from "./audit/routes.js";
 import { configurePassport } from "./auth/sso.service.js";
 import { authRouter } from "./auth/routes.js";
@@ -14,8 +18,10 @@ import { usersRouter } from "./users/routes.js";
 
 export function createApp() {
   const app = express();
+  app.set("trust proxy", 1);
 
   app.use(helmet());
+  app.use(pinoHttp({ logger }));
   app.use(express.json());
   app.use(
     cors({
@@ -86,19 +92,25 @@ export function createApp() {
     }
   });
 
+  app.use(apiKeyMiddleware);
+
   app.use("/api/auth", authRouter);
   app.use("/api/accounts", accountsRouter);
   app.use("/api/users", usersRouter);
   app.use("/api/audit", auditRouter);
+  app.use("/api/keys", apiKeysRouter);
   app.use("/api/catalog", catalogRouter);
   app.use("/api/orders", ordersRouter);
   app.use("/api/purchase", purchaseRouter);
 
   app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
-    console.error(err);
-    res.status(500).json({
-      error: err instanceof Error ? err.message : "Internal server error",
-    });
+    logger.error({ err }, "Unhandled error");
+    const message = config.isProd()
+      ? "Internal server error"
+      : err instanceof Error
+        ? err.message
+        : "Internal server error";
+    res.status(500).json({ error: message });
   });
 
   return app;

@@ -10,6 +10,8 @@ export interface CachedRoleContext {
   roleSlug: string;
   privileges: string[];
   isPlatformAdmin: boolean;
+  mfaEnabled: boolean;
+  accountMfaEnforced: boolean;
 }
 
 export async function getRoleFromCache(userId: number): Promise<CachedRoleContext | null> {
@@ -54,6 +56,8 @@ export async function loadRoleFromDb(userId: number): Promise<CachedRoleContext 
     role_id: number;
     role_slug: string;
     privilege_code: string | null;
+    mfa_enabled: boolean;
+    mfa_enforced: boolean;
   }>(
     `
     SELECT
@@ -62,7 +66,9 @@ export async function loadRoleFromDb(userId: number): Promise<CachedRoleContext 
       a.account_type,
       r.id AS role_id,
       r.slug AS role_slug,
-      p.code AS privilege_code
+      p.code AS privilege_code,
+      u.mfa_enabled,
+      COALESCE(a.mfa_enforced, FALSE) AS mfa_enforced
     FROM users u
     JOIN accounts a ON a.id = u.account_id
     JOIN roles r ON r.id = u.role_id
@@ -92,6 +98,8 @@ export async function loadRoleFromDb(userId: number): Promise<CachedRoleContext 
     roleSlug: first.role_slug,
     privileges,
     isPlatformAdmin: privileges.includes("platform_admin"),
+    mfaEnabled: first.mfa_enabled,
+    accountMfaEnforced: first.mfa_enforced,
   };
 
   await setRoleCache(ctx);

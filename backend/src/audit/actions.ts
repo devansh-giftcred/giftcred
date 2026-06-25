@@ -15,6 +15,7 @@ export const AuditAction = {
   INVITE_EXPIRED: "invite_expired",
   SESSION_CREATED: "session_created",
   SESSION_REVOKED: "session_revoked",
+  SESSION_REVOKED_BY_ADMIN: "session_revoked_by_admin",
   LOGIN_SUCCESS: "login_success",
   LOGIN_FAILED: "login_failed",
   LOGOUT: "logout",
