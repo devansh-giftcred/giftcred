@@ -1,6 +1,7 @@
 import type { PoolClient } from "pg";
 import { AuditAction } from "../audit/actions.js";
 import { writeAuditLog } from "../audit/audit.service.js";
+import { enforceIpAllowlist } from "./account-access.service.js";
 import { query } from "../db.js";
 import { AuthError } from "../lib/errors.js";
 import { invalidateRoleCache, resolveUserRole, type CachedRoleContext } from "../redis/roleCache.js";
@@ -24,6 +25,7 @@ type LoginUserRow = {
   mfa_enabled: boolean;
   account_type: "platform" | "master" | "child";
   mfa_enforced: boolean;
+  sso_enforced: boolean;
 };
 
 function isMfaEnforcementActive(
@@ -42,7 +44,8 @@ export async function loginWithPassword(
   const normalized = normalizeEmail(email);
   const result = await client.query<LoginUserRow>(
     `SELECT u.id, u.email, u.password_hash, u.account_id, u.role_id, u.status, u.mfa_enabled,
-            a.account_type, COALESCE(a.mfa_enforced, FALSE) AS mfa_enforced
+            a.account_type, COALESCE(a.mfa_enforced, FALSE) AS mfa_enforced,
+            COALESCE(a.sso_enforced, FALSE) AS sso_enforced
      FROM users u
      JOIN accounts a ON a.id = u.account_id
      WHERE u.email = $1`,
@@ -63,6 +66,19 @@ export async function loginWithPassword(
   if (user.status !== "active") {
     throw new AuthError("Account is not active.", 403);
   }
+
+  if (user.account_type !== "platform" && user.sso_enforced) {
+    throw new AuthError(
+      "Your organization requires SSO login. Please log in with Google or Microsoft.",
+      403
+    );
+  }
+
+  await enforceIpAllowlist(client, user.account_id, meta.ipAddress, {
+    actingUserId: user.id,
+    userAgent: meta.userAgent,
+    email: user.email,
+  });
 
   const valid = await verifyPassword(password, user.password_hash);
   if (!valid) {
@@ -233,6 +249,7 @@ function buildAuthContext(email: string, role: CachedRoleContext | null): AuthCo
     isPlatformAdmin: role.isPlatformAdmin,
     mfaEnabled: role.mfaEnabled,
     mfaEnforcementActive,
+    ipAllowlist: role.ipAllowlist,
   };
 }
 

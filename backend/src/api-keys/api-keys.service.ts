@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import type { PoolClient } from "pg";
 import { AuthError } from "../lib/errors.js";
 import type { AuthContext } from "../types/auth.js";
+import { parseIpAllowlist } from "../lib/ipUtils.js";
 
 const KEY_BYTES = 32;
 const PREFIX_LENGTH = 8;
@@ -99,7 +100,13 @@ export async function revokeApiKey(
 export async function verifyApiKey(
   client: PoolClient,
   rawKey: string
-): Promise<{ accountId: number; keyId: number; scopes: string[]; accountType: AuthContext["accountType"] } | null> {
+): Promise<{
+  accountId: number;
+  keyId: number;
+  scopes: string[];
+  accountType: AuthContext["accountType"];
+  ipAllowlist: string[];
+} | null> {
   if (!rawKey || rawKey.length < PREFIX_LENGTH) return null;
 
   const prefix = rawKey.slice(0, PREFIX_LENGTH);
@@ -110,9 +117,11 @@ export async function verifyApiKey(
     scopes: string[];
     expires_at: Date | null;
     account_type: AuthContext["accountType"];
+    ip_allowlist: unknown;
   }>(
     `
-    SELECT k.id, k.account_id, k.key_hash, k.scopes, k.expires_at, a.account_type
+    SELECT k.id, k.account_id, k.key_hash, k.scopes, k.expires_at, a.account_type,
+           COALESCE(a.ip_allowlist, '[]'::jsonb) AS ip_allowlist
     FROM api_keys k
     JOIN accounts a ON a.id = k.account_id
     WHERE k.prefix = $1 AND k.revoked_at IS NULL
@@ -129,6 +138,7 @@ export async function verifyApiKey(
       keyId: row.id,
       scopes: Array.isArray(row.scopes) ? row.scopes : [],
       accountType: row.account_type,
+      ipAllowlist: parseIpAllowlist(row.ip_allowlist),
     };
   }
 
