@@ -6,8 +6,10 @@ import { accountsRouter } from "./accounts/routes.js";
 import { auditRouter } from "./audit/routes.js";
 import { configurePassport } from "./auth/sso.service.js";
 import { authRouter } from "./auth/routes.js";
+import { catalogRouter } from "./catalog/routes.js";
 import { config } from "./config.js";
 import { getPool } from "./db.js";
+import { ordersRouter, purchaseRouter } from "./orders/routes.js";
 import { usersRouter } from "./users/routes.js";
 
 export function createApp() {
@@ -60,6 +62,14 @@ export function createApp() {
         audit: {
           logs: "GET /api/audit/logs",
         },
+        catalog: {
+          list: "GET /api/catalog",
+          product: "GET /api/catalog/:sku",
+        },
+        orders: {
+          list: "GET /api/orders",
+          purchase: "POST /api/purchase",
+        },
       },
     });
   });
@@ -80,6 +90,9 @@ export function createApp() {
   app.use("/api/accounts", accountsRouter);
   app.use("/api/users", usersRouter);
   app.use("/api/audit", auditRouter);
+  app.use("/api/catalog", catalogRouter);
+  app.use("/api/orders", ordersRouter);
+  app.use("/api/purchase", purchaseRouter);
 
   app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
     console.error(err);

@@ -1,8 +1,0 @@
-{
-  "parsed": {
-    "oauth_token": "3bc283103a09ab4301c56204c59a810b",
-    "oauth_token_secret": "dd92f082b837dfc3288973dacf17bd71",
-    "oauth_callback_confirmed": "true"
-  },
-  "raw": "oauth_token=3bc283103a09ab4301c56204c59a810b&oauth_token_secret=dd92f082b837dfc3288973dacf17bd71&oauth_callback_confirmed=true"
-}

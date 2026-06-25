@@ -46,6 +46,14 @@ export const config = {
   jwtAccessTtlMinutes: () => optionalInt("JWT_ACCESS_TTL_MINUTES", 15),
   jwtRefreshTtlDays: () => optionalInt("JWT_REFRESH_TTL_DAYS", 30),
 
+  woohooConsumerKey: () => requireEnv("WOOHOO_CONSUMER_KEY"),
+  woohooConsumerSecret: () => requireEnv("WOOHOO_CONSUMER_SECRET"),
+  woohooUsername: () => requireEnv("WOOHOO_USERNAME"),
+  woohooPassword: () => requireEnv("WOOHOO_PASSWORD"),
+  woohooBaseUrl: () => optionalEnv("WOOHOO_BASE_URL", "https://sandbox.woohoo.in").replace(/\/$/, ""),
+  woohooRequestTimeout: () => optionalInt("WOOHOO_REQUEST_TIMEOUT", 30) * 1000,
+  woohooMaxRetries: () => optionalInt("WOOHOO_MAX_RETRIES", 3),
+
   gmailUser: () => requireEnv("GMAIL_USER"),
   gmailAppPassword: () => requireEnv("GMAIL_APP_PASSWORD"),
   emailFrom: () => optionalEnv("EMAIL_FROM", `GiftCred <${process.env.GMAIL_USER ?? "noreply@giftcred.com"}>`),
