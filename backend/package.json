@@ -25,6 +25,7 @@
     "express-rate-limit": "^8.5.2",
     "helmet": "^8.0.0",
     "ioredis": "^5.4.2",
+    "ipaddr.js": "^2.2.0",
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.9.16",
     "oauth-1.0a": "^2.2.6",

@@ -1,7 +1,8 @@
 import type { Response, NextFunction } from "express";
-import { withClient } from "../db.js";
 import { verifyAccessToken } from "../auth/jwt.service.js";
 import { buildAuthContextForUser } from "../auth/login.service.js";
+import { extractClientIp } from "../auth/crypto.utils.js";
+import { isIpAllowed } from "../lib/ipUtils.js";
 import { invalidateRoleCache } from "../redis/roleCache.js";
 import {
   clearSessionActivity,
@@ -10,6 +11,7 @@ import {
   revokeSession,
 } from "../auth/session.service.js";
 import type { AuthedRequest } from "../types/auth.js";
+import { withClient } from "../db.js";
 
 const MFA_SETUP_ALLOWED_PATHS = new Set([
   "/api/auth/mfa/setup",
@@ -27,7 +29,13 @@ export async function authMiddleware(
   res: Response,
   next: NextFunction
 ): Promise<void> {
+  const clientIp = extractClientIp(req);
+
   if (req.auth?.isApiKeyAuth) {
+    if (!isIpAllowed(clientIp, req.auth.ipAllowlist)) {
+      res.status(403).json({ error: "Access denied from this IP address." });
+      return;
+    }
     next();
     return;
   }
@@ -83,6 +91,11 @@ export async function authMiddleware(
     !isMfaSetupAllowedPath(req)
   ) {
     res.status(403).json({ error: "MFA setup required" });
+    return;
+  }
+
+  if (!isIpAllowed(clientIp, auth.ipAllowlist)) {
+    res.status(403).json({ error: "Access denied from this IP address." });
     return;
   }
 

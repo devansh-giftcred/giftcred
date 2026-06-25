@@ -1,5 +1,6 @@
 import { config } from "../config.js";
 import { query } from "../db.js";
+import { parseIpAllowlist } from "../lib/ipUtils.js";
 import { getRedis, isRedisReady, roleCacheKey } from "./client.js";
 
 export interface CachedRoleContext {
@@ -12,6 +13,7 @@ export interface CachedRoleContext {
   isPlatformAdmin: boolean;
   mfaEnabled: boolean;
   accountMfaEnforced: boolean;
+  ipAllowlist: string[];
 }
 
 export async function getRoleFromCache(userId: number): Promise<CachedRoleContext | null> {
@@ -58,6 +60,7 @@ export async function loadRoleFromDb(userId: number): Promise<CachedRoleContext 
     privilege_code: string | null;
     mfa_enabled: boolean;
     mfa_enforced: boolean;
+    ip_allowlist: unknown;
   }>(
     `
     SELECT
@@ -68,7 +71,8 @@ export async function loadRoleFromDb(userId: number): Promise<CachedRoleContext 
       r.slug AS role_slug,
       p.code AS privilege_code,
       u.mfa_enabled,
-      COALESCE(a.mfa_enforced, FALSE) AS mfa_enforced
+      COALESCE(a.mfa_enforced, FALSE) AS mfa_enforced,
+      COALESCE(a.ip_allowlist, '[]'::jsonb) AS ip_allowlist
     FROM users u
     JOIN accounts a ON a.id = u.account_id
     JOIN roles r ON r.id = u.role_id
@@ -100,6 +104,7 @@ export async function loadRoleFromDb(userId: number): Promise<CachedRoleContext 
     isPlatformAdmin: privileges.includes("platform_admin"),
     mfaEnabled: first.mfa_enabled,
     accountMfaEnforced: first.mfa_enforced,
+    ipAllowlist: parseIpAllowlist(first.ip_allowlist),
   };
 
   await setRoleCache(ctx);

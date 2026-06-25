@@ -25,6 +25,7 @@ import { AuditAction } from "../audit/actions.js";
 import { writeAuditLog } from "../audit/audit.service.js";
 import { changePassword } from "../auth/password-change.service.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
+import { enforceIpAllowlist } from "../auth/account-access.service.js";
 import { config } from "../config.js";
 
 export const authRouter = Router();
@@ -428,6 +429,12 @@ async function handleSsoLogin(
   if (user.status !== "active") {
     throw new AuthError("Your account has been suspended. Contact administrator.", 403);
   }
+
+  await enforceIpAllowlist(client, user.account_id, meta.ipAddress, {
+    actingUserId: user.user_id,
+    userAgent: meta.userAgent,
+    email: user.email,
+  });
 
   await linkSsoIdentity(client, user.user_id, profile, {
     ...meta,

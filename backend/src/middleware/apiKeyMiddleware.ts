@@ -2,6 +2,8 @@ import type { Response, NextFunction } from "express";
 import { withClient } from "../db.js";
 import type { AuthedRequest } from "../types/auth.js";
 import { B2B_SYSTEM_USER_ID, verifyApiKey } from "../api-keys/api-keys.service.js";
+import { extractClientIp } from "../auth/crypto.utils.js";
+import { isIpAllowed } from "../lib/ipUtils.js";
 
 export async function apiKeyMiddleware(
   req: AuthedRequest,
@@ -25,6 +27,12 @@ export async function apiKeyMiddleware(
     return;
   }
 
+  const clientIp = extractClientIp(req);
+  if (!isIpAllowed(clientIp, verified.ipAllowlist)) {
+    res.status(403).json({ error: "Access denied from this IP address." });
+    return;
+  }
+
   req.auth = {
     userId: B2B_SYSTEM_USER_ID,
     email: "b2b-api@system.giftcred",
@@ -36,6 +44,7 @@ export async function apiKeyMiddleware(
     isPlatformAdmin: false,
     mfaEnabled: true,
     mfaEnforcementActive: false,
+    ipAllowlist: verified.ipAllowlist,
     isApiKeyAuth: true,
     apiKeyId: verified.keyId,
   };

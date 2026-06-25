@@ -15,6 +15,7 @@ export interface AuthContext {
   isPlatformAdmin: boolean;
   mfaEnabled: boolean;
   mfaEnforcementActive: boolean;
+  ipAllowlist: string[];
   isApiKeyAuth?: boolean;
   apiKeyId?: number;
 }
