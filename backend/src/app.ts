@@ -13,6 +13,7 @@ import { authRouter } from "./auth/routes.js";
 import { catalogRouter } from "./catalog/routes.js";
 import { config } from "./config.js";
 import { getPool } from "./db.js";
+import { ledgerRouter } from "./ledger/routes.js";
 import { ordersRouter, purchaseRouter } from "./orders/routes.js";
 import { usersRouter } from "./users/routes.js";
 
@@ -76,6 +77,12 @@ export function createApp() {
           list: "GET /api/orders",
           purchase: "POST /api/purchase",
         },
+        ledger: {
+          myWallets: "GET /api/ledger/wallets/me",
+          placeHold: "POST /api/ledger/holds",
+          captureHold: "POST /api/ledger/holds/:id/capture",
+          voidHold: "POST /api/ledger/holds/:id/void",
+        },
       },
     });
   });
@@ -99,6 +106,7 @@ export function createApp() {
   app.use("/api/users", usersRouter);
   app.use("/api/audit", auditRouter);
   app.use("/api/keys", apiKeysRouter);
+  app.use("/api/ledger", ledgerRouter);
   app.use("/api/catalog", catalogRouter);
   app.use("/api/orders", ordersRouter);
   app.use("/api/purchase", purchaseRouter);

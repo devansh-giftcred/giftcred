@@ -9,6 +9,7 @@ import { invalidateRoleCache } from "../redis/roleCache.js";
 import { generateSecureToken, hashToken, normalizeEmail } from "../auth/crypto.utils.js";
 import { AuthError } from "../lib/errors.js";
 import { hashPassword } from "../auth/password.service.js";
+import { createWalletForUser } from "../ledger/ledger.service.js";
 
 let transporter: nodemailer.Transporter | null = null;
 
@@ -140,6 +141,8 @@ export async function acceptInvite(
   );
 
   const userId = userResult.rows[0].id;
+
+  await createWalletForUser(client, userId, invite.account_id, "INR");
 
   await client.query(
     `
